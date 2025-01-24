@@ -15,6 +15,8 @@ option và đồng thời có title là properties để hiển thị tên của
 public class Menu {
     // mảng lưu các sự lựa chọn
     ArrayList<String> optionList = new ArrayList<>();
+    // tạo instance inputer
+    Inputter input = new Inputter();
     // property
     private String title;
     
@@ -41,6 +43,7 @@ public class Menu {
     
     // hàm getChoice thu thập lựa chọn của người dùng
     public int getChoice(){
-        return 1;
+        int result = input.getInt("Please input your choice: ");
+        return result;
     }
 }
