@@ -78,7 +78,11 @@ public class Student {
     }
     
     // Method: toString(): String
-    
+    public String toString(){
+        String str = String.format("%-15s| %-15s | %-15s | %-8s | %-8.0f",
+         id, name, phone, mountainCode, tutionFee);
+        return str;
+    }
    
     
 }
