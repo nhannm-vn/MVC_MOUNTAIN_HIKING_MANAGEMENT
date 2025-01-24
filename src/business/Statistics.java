@@ -36,20 +36,23 @@ public class Statistics extends HashMap<String, StatisticalInfo>{
     // Phương thức thực hiện thống kê dữ liệu dựa trên danh sách
     //nghĩa là nó sẽ nhận vào danh sách và tiến hành thống kê
     public final void statisticalize(List<Student> list){
-        for (Student i : list) {
-            if(this.containsKey(i.getMountainCode())){
-                StatisticalInfo x = this.get(i.getMountainCode());
+        // Duyet danh sach
+        for (Student item : list) {
+            // TH: có key trong hashmap
+            if(this.containsKey(item.getMountainCode())){
+                // moc object đo ra
+                StatisticalInfo x = this.get(item.getMountainCode());
+                // cap nhat
                 x.setNumOfStudent(x.getNumOfStudent() + 1);
-                x.setTotalCost(x.getTotalCost() + i.getTutionFee());
+                x.setTotalCost(x.getTotalCost() + item.getTutionFee());
             }else{
-                StatisticalInfo z = new StatisticalInfo(i.getMountainCode(), 1, 
-                                                        i.getTutionFee());
-                // Thêm vào danh sách hashmap
-                // key      |      obj
-                this.put(i.getMountainCode(), z);
+                // create obj
+                StatisticalInfo z = new StatisticalInfo(item.getMountainCode(), 1, 
+                                                            item.getTutionFee());
+                // them vao hashmap
+                this.put(item.getMountainCode(), z);
             }
         }
-        
     }
     
     // Phương thức hiển thị thông tin thống kê
