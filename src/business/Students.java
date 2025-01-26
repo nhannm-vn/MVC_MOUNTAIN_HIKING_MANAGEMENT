@@ -13,5 +13,15 @@ public class Students {
     Inputter input = new Inputter();
           
     // Properties
+    private String pathFile;
+    private boolean isSaved;
+    
+    // Constructor
+
+    public Students() {
+        this.pathFile = "D:\\PIEDTEAM_MERN\\F2\\Mvc-MountainHiking\\StudentList.csv";
+    }
+    
+    
     
 }
