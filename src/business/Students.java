@@ -34,6 +34,24 @@ public class Students {
         studentList.add(x);
     }
     
+    //update(Student x): void
+    public void update(Student x){
+        // Tìm pos
+        int pos = studentList.indexOf(x);
+        // Ghì đè 
+        studentList.set(pos, x);
+    }
     
+    
+    
+    //searchById(String id): Student
+    public Student searchById(String id){
+        for (Student item : studentList) {
+            if(item.getId().equals(id)){
+                return item;
+            }
+        }
+        return null;
+    }
     
 }
