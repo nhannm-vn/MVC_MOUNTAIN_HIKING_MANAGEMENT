@@ -19,6 +19,7 @@ public class Mountains {
 
     // Method
     //get(String mountainCode): Mountain
+    // Dựa vào mã núi để tìm ra đỉnh núi
     public Mountain get(String mountainCode) {
         for (Mountain item : mountainList) {
             if (item.getMountainCode().equals(mountainCode)) {
@@ -28,4 +29,12 @@ public class Mountains {
         return null;
     }
 
+    //isValidMountainCode(String mountainCode): boolean
+    // dựa vào mã núi kiểm tra xem có núi trong danh sách không
+    public boolean isValidMountainCode(String mountainCode){
+        Mountain m = get(mountainCode);
+        return m != null ? true : false;
+    }
+    
+    
 }
