@@ -1,6 +1,7 @@
 package business;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 import model.Mountain;
 
 public class Mountains {
@@ -36,5 +37,27 @@ public class Mountains {
         return m != null ? true : false;
     }
     
+    //dataToObject(String text): Mountain
+    // nhận vào string sau đó băm ra đúc và trả ra obj
+    public Mountain dataToObject(String text){
+        StringTokenizer st = new StringTokenizer(text, ",");
+        // Đổ các field băm ra được vào biến
+        // Tuy nhiên đối với id thì độ chế tí
+        String mountainCode = st.nextToken().trim();
+        // Nghĩa là từ 1 đến 9 thì thêm số 0
+        if(mountainCode.matches("\\d")){
+            mountainCode = "MT0" + mountainCode;
+        }else{
+            mountainCode = "MT" + mountainCode;
+        }
+        // các prop khác
+        String mountain = st.nextToken().trim();
+        String province = st.nextToken().trim();
+        String description = st.nextToken().trim();
+        
+        // Đúc ra obj
+        Mountain m = new Mountain(mountainCode, mountain, province, description);
+        return m;
+    }
     
 }
