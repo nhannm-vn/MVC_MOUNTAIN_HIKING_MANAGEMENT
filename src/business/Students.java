@@ -59,8 +59,29 @@ public class Students {
         // Tạo cái mảng để lưu những thằng Student có một phần tên hoặc toàn phần
         ArrayList<Student> tempList = new ArrayList<>();
         
+        // Kiểm tra trong mảng 
+        for (Student item : tempList) {
+            if(item.getName().contains(name)){
+                tempList.add(item);
+            }
+        }
         
-        
+        // Thông báo
+        if(!tempList.isEmpty()){
+            System.out.println("No one matches the search criteria!");
+        }else{
+            System.out.println("Matching Students:");
+            String str = String.format(
+                    "-----------------------------------------------------------------------------\n"
+                    + "Student ID     | Name            | Phone           | Peak Code| Fee\n"
+                    + "-----------------------------------------------------------------------------"
+            );
+            System.out.println(str);
+            for (Student student : tempList) {
+                System.out.println(student.toString());
+            }
+            System.out.println("-----------------------------------------------------------------------------");
+        }
     }
     
 }
