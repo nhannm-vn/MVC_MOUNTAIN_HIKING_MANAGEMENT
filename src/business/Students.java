@@ -215,11 +215,19 @@ public class Students {
         if(!f.exists()) return;
         try {
             FileWriter fw = new FileWriter(f);
-            BufferedWriter bw = new BufferedWriter(fw);
+            BufferedWriter writter = new BufferedWriter(fw);
             for (Student student : studentList) {
-                
+                writter.write(student.getId() + "," + student.getName() + "," 
+                              + student.getPhone() + "," + student.getEmail() + ","
+                              + student.getMountainCode() + "," + student.getTutionFee());
+                // xuong dong
+                writter.newLine();
             }
+            writter.close();
+            // Khi chay xong method nay thi xac nhan da luu roi
+            this.isSaved = true;
         } catch (Exception e) {
+            System.out.println("File loi roi: " +e);
         }
     }
 
