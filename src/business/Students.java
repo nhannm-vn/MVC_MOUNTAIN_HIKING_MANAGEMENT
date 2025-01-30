@@ -1,6 +1,7 @@
 package business;
 
 import java.util.ArrayList;
+import java.util.List;
 import model.Student;
 import tools.Inputter;
 
@@ -103,6 +104,19 @@ public class Students {
             System.out.println("-----------------------------------------------------------------------------");
         }
         
+    }
+    
+    // filterByCampusCode(String: campusCode): List<Student>
+    public List<Student> filterByCampusCode(String campusCode){
+        // Tạo cái mảng tạm: khai cha- new con
+        List<Student> tempList = new ArrayList<>();
+        // Check trong danh sach và thêm vào mảng tạm
+        for (Student item : tempList) {
+            if(item.getId().contains(campusCode.toUpperCase())){
+                tempList.add(item);
+            }
+        }
+        return tempList;
     }
     
 }
