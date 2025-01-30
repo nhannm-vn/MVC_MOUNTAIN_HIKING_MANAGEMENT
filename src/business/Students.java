@@ -67,7 +67,7 @@ public class Students {
         }
         
         // Thông báo
-        if(!tempList.isEmpty()){
+        if(tempList.isEmpty()){
             System.out.println("No one matches the search criteria!");
         }else{
             System.out.println("Matching Students:");
@@ -82,6 +82,27 @@ public class Students {
             }
             System.out.println("-----------------------------------------------------------------------------");
         }
+    }
+    
+    // showAll(): void
+    public void showAll(){
+        // Check xem trong danh sách có Student nào không
+        if(studentList.isEmpty()){
+            System.out.println("No students have registered yet.");
+        }else{
+            System.out.println("Registered Students:");
+            String str = String.format(
+                    "-----------------------------------------------------------------------------\n"
+                    + "Student ID     | Name            | Phone           | Peak Code| Fee\n"
+                    + "-----------------------------------------------------------------------------"
+            );
+            System.out.println(str);
+            for (Student student : studentList) {
+                System.out.println(student.toString());
+            }
+            System.out.println("-----------------------------------------------------------------------------");
+        }
+        
     }
     
 }
