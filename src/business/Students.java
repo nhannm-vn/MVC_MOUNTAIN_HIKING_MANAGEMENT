@@ -1,8 +1,10 @@
 package business;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -201,6 +203,23 @@ public class Students {
             br.close();
         } catch (Exception e) {
             System.out.println("File loi roi: " +e);
+        }
+    }
+    
+    // saveToFile()
+    public void saveToFile(){
+        // Nếu đã lưu rồi thì không chạy method này
+        if(isSaved) return;
+        // Tạo obj file
+        File f = new File(pathFile);
+        if(!f.exists()) return;
+        try {
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Student student : studentList) {
+                
+            }
+        } catch (Exception e) {
         }
     }
 
