@@ -54,4 +54,13 @@ public class Students {
         return null;
     }
     
+    //searchByName(String name): void
+    public void searchByName(String name){
+        // Tạo cái mảng để lưu những thằng Student có một phần tên hoặc toàn phần
+        ArrayList<Student> tempList = new ArrayList<>();
+        
+        
+        
+    }
+    
 }
