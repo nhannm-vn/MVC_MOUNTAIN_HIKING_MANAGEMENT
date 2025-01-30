@@ -5,72 +5,102 @@ import java.util.List;
 import model.Student;
 import tools.Inputter;
 
-
 public class Students {
+
     // Mang luu cac student
     ArrayList<Student> studentList = new ArrayList<>();
-    
+
     // Tao instance input de de dang nhap lieu
     Inputter input = new Inputter();
-          
+
     // Properties
     private String pathFile;
     private boolean isSaved;
-    
-    // Constructor
 
+    // Constructor
     public Students() {
         this.pathFile = "D:\\PIEDTEAM_MERN\\F2\\Mvc-MountainHiking\\StudentList.csv";
     }
-    
+
     // Method
     //isSaved(): boolean
     //Hỗ trợ cho việc check đã save trước khi tắt chưa
-    public boolean isSaved(){
+    public boolean isSaved() {
         return this.isSaved;
     }
-    
+
     //add(Student x):void
-    public void add(Student x){
+    public void add(Student x) {
         studentList.add(x);
     }
-    
+
     //update(Student x): void
-    public void update(Student x){
+    public void update(Student x) {
         // Tìm pos
         int pos = studentList.indexOf(x);
         // Ghì đè 
         studentList.set(pos, x);
     }
-    
+
     //delete(String id): void
-    
+    public void delete(String id) {
+        // Kiểm tra xem student muốn delete đã tồn tại trong danh sách chưa
+        Student studentCheck = searchById(id);
+        // Bằng null nghĩa là không tìm thấy thì thông báo
+        if (studentCheck == null) {
+            System.out.println("This student has not registered yet.");
+        }else{
+            // In ra thong tin va hoi muon xoa khong
+            System.out.println("Student Details:");
+            System.out.println("-----------------------------------------------------");
+            // Tạo format để in đẹp
+            String str = String.format(
+                    "Student ID: " + studentCheck.getId() + "\n"
+                    + "Name      : " + studentCheck.getName() + "\n"
+                    + "Phone     : " + studentCheck.getPhone() + "\n"
+                    + "Mountain  : " + studentCheck.getMountainCode() + "\n"
+                    + "Fee       : " + studentCheck.getTutionFee() + "\n"
+            );
+            System.out.println(str);
+            System.out.println("-----------------------------------------------------");
+            String result = input.getString("Are you sure you want to delete this registration? (Y/N):");
+            // Nếu như nhập y hoặc Y thì xóa
+            if(result.matches("^[Yy]$")){
+                studentList.remove(studentCheck);
+                System.out.println("The registration has been successfully deleted");
+            }else{
+                // Nếu như người dùng không bấm Yes thì dừng method
+                return;
+            }
+        }
+    }
+
     //searchById(String id): Student
-    public Student searchById(String id){
+    public Student searchById(String id) {
         for (Student item : studentList) {
-            if(item.getId().equals(id)){
+            if (item.getId().equals(id)) {
                 return item;
             }
         }
         return null;
     }
-    
+
     //searchByName(String name): void
-    public void searchByName(String name){
+    public void searchByName(String name) {
         // Tạo cái mảng để lưu những thằng Student có một phần tên hoặc toàn phần
         ArrayList<Student> tempList = new ArrayList<>();
-        
+
         // Kiểm tra trong mảng 
         for (Student item : tempList) {
-            if(item.getName().contains(name)){
+            if (item.getName().contains(name)) {
                 tempList.add(item);
             }
         }
-        
+
         // Thông báo
-        if(tempList.isEmpty()){
+        if (tempList.isEmpty()) {
             System.out.println("No one matches the search criteria!");
-        }else{
+        } else {
             System.out.println("Matching Students:");
             String str = String.format(
                     "-----------------------------------------------------------------------------\n"
@@ -84,13 +114,13 @@ public class Students {
             System.out.println("-----------------------------------------------------------------------------");
         }
     }
-    
+
     // showAll(): void
-    public void showAll(){
+    public void showAll() {
         // Check xem trong danh sách có Student nào không
-        if(studentList.isEmpty()){
+        if (studentList.isEmpty()) {
             System.out.println("No students have registered yet.");
-        }else{
+        } else {
             System.out.println("Registered Students:");
             String str = String.format(
                     "-----------------------------------------------------------------------------\n"
@@ -103,32 +133,30 @@ public class Students {
             }
             System.out.println("-----------------------------------------------------------------------------");
         }
-        
+
     }
-    
+
     // statisticalizeByMountainPeak():void
-    public void statisticalizeByMountainPeak(){
+    public void statisticalizeByMountainPeak() {
         // Tạo instance Statistics
         Statistics management = new Statistics(studentList);
         // Sau khi đã thống kê thì tiến hành in ra 
         management.show();
     }
-    
+
     // filterByCampusCode(String: campusCode): List<Student>
-    public List<Student> filterByCampusCode(String campusCode){
+    public List<Student> filterByCampusCode(String campusCode) {
         // Tạo cái mảng tạm: khai cha- new con
         List<Student> tempList = new ArrayList<>();
         // Check trong danh sach và thêm vào mảng tạm
         for (Student item : tempList) {
             // Ở đây mình sẽ upperCase lên để dễ cho việc filter
             //đối với tìm kiếm nhập bậy thì không có chứ không quá nghiêm khắc
-            if(item.getId().contains(campusCode.toUpperCase())){
+            if (item.getId().contains(campusCode.toUpperCase())) {
                 tempList.add(item);
             }
         }
         return tempList;
     }
-    
-    
-    
+
 }
