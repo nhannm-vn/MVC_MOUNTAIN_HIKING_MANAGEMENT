@@ -1,7 +1,11 @@
 package business;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import model.Student;
 import tools.Inputter;
 
@@ -49,7 +53,7 @@ public class Students {
         // Bằng null nghĩa là không tìm thấy thì thông báo
         if (studentCheck == null) {
             System.out.println("This student has not registered yet.");
-        }else{
+        } else {
             // In ra thong tin va hoi muon xoa khong
             System.out.println("Student Details:");
             System.out.println("-----------------------------------------------------");
@@ -65,10 +69,10 @@ public class Students {
             System.out.println("-----------------------------------------------------");
             String result = input.getString("Are you sure you want to delete this registration? (Y/N):");
             // Nếu như nhập y hoặc Y thì xóa
-            if(result.matches("^[Yy]$")){
+            if (result.matches("^[Yy]$")) {
                 studentList.remove(studentCheck);
                 System.out.println("The registration has been successfully deleted");
-            }else{
+            } else {
                 // Nếu như người dùng không bấm Yes thì dừng method
                 return;
             }
@@ -157,6 +161,47 @@ public class Students {
             }
         }
         return tempList;
+    }
+
+    // readFromFile():void
+    public void readFromFile() {
+        // Tạo ra instance obj file
+        File f = new File(pathFile);
+        // Quá trình đọc file có thể có lỗi nên cần try-catch
+        try {
+            // Nếu instance tạo mà bị lỗi thì thông báo và dừng luôn
+            if (!f.exists()) {
+                System.out.println("StudentList.csv file not found !.");
+                return;
+            }
+            // Tạo đối tượng đọc dữ liệu
+            FileReader fr = new FileReader(f);
+            // Tạo buffer đọc và lấy dữ liệu
+            BufferedReader br = new BufferedReader(fr);
+            // Đọc dòng đầu tiên
+            String line = br.readLine();
+            while(line != null && !line.isEmpty()){
+                // Băm các field ra bằng StringTokenizer
+                StringTokenizer st = new StringTokenizer(line, ",");
+                String id = st.nextToken();
+                String name = st.nextToken();
+                String phone = st.nextToken();
+                String email = st.nextToken();
+                String mountainCode = st.nextToken();
+                double tutionFee = Double.parseDouble(st.nextToken());
+                // tạo obj
+                // Viết tới đây sẽ hiểu tại sao cần để cho model Student cái phểu mặc định
+                Student s = new Student(id, name, phone, email, mountainCode, tutionFee);
+                // thêm vào danh sách
+                studentList.add(s);
+                // Đọc dòng tiếp theo
+                line = br.readLine();
+            }
+            // Đóng 
+            br.close();
+        } catch (Exception e) {
+            System.out.println("File loi roi: " +e);
+        }
     }
 
 }
