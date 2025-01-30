@@ -43,7 +43,7 @@ public class Students {
         studentList.set(pos, x);
     }
     
-    
+    //delete(String id): void
     
     //searchById(String id): Student
     public Student searchById(String id){
@@ -106,17 +106,29 @@ public class Students {
         
     }
     
+    // statisticalizeByMountainPeak():void
+    public void statisticalizeByMountainPeak(){
+        // Tạo instance Statistics
+        Statistics management = new Statistics(studentList);
+        // Sau khi đã thống kê thì tiến hành in ra 
+        management.show();
+    }
+    
     // filterByCampusCode(String: campusCode): List<Student>
     public List<Student> filterByCampusCode(String campusCode){
         // Tạo cái mảng tạm: khai cha- new con
         List<Student> tempList = new ArrayList<>();
         // Check trong danh sach và thêm vào mảng tạm
         for (Student item : tempList) {
+            // Ở đây mình sẽ upperCase lên để dễ cho việc filter
+            //đối với tìm kiếm nhập bậy thì không có chứ không quá nghiêm khắc
             if(item.getId().contains(campusCode.toUpperCase())){
                 tempList.add(item);
             }
         }
         return tempList;
     }
+    
+    
     
 }
