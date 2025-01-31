@@ -3,6 +3,7 @@ package dispatcher;
 import business.Mountains;
 import business.Students;
 import java.util.ArrayList;
+import java.util.List;
 import model.Mountain;
 import model.Student;
 import tools.Acceptable;
@@ -10,7 +11,7 @@ import tools.Inputter;
 import tools.Menu;
 
 public class Main {
-    
+
     public static void main(String[] args) {
         // Tạo instance Students chuyên quản lí các chức năng liên quan đến danh sách
         Students sm = new Students();
@@ -63,12 +64,34 @@ public class Main {
                 }
                 case 5: {
                     // Yêu cầu người dùng nhập tên đầy đủ hoặc một phần tên
-                    String keyName = input.inputAndLoop("Input full name or a part of name:", 
+                    String keyName = input.inputAndLoop("Input full name or a part of name:",
                             Acceptable.NAME_VALID);
                     sm.searchByName(keyName);
                     break;
                 }
                 case 6: {
+                    // Yêu cầu người dùng nhập vào campus
+                    String keyCampus = input.inputAndLoop("Input your campusCode wannna to find(e.g., CE,DE,HE,SE,QE):",
+                            "^\\D{2}$");
+                    // Tạo mảng tạm để chứa
+                    List<Student> filter = new ArrayList<>();
+                    filter = sm.filterByCampusCode(keyCampus);
+                    // Check và thông báo
+                    if (filter.size() > 0) {
+                        System.out.println("Registered Students Under Campus " + keyCampus + ":");
+                        String str = String.format(
+                                "-----------------------------------------------------------------------------\n"
+                                + "Student ID     | Name            | Phone           | Peak Code| Fee\n"
+                                + "-----------------------------------------------------------------------------"
+                        );
+                        System.out.println(str);
+                        for (Student student : filter) {
+                            System.out.println(student.toString());
+                        }
+                        System.out.println("-----------------------------------------------------------------------------");
+                    }else{
+                        System.out.println("No students have registered under this campus.");
+                    }
                     break;
                 }
                 case 7: {
@@ -86,6 +109,6 @@ public class Main {
                 }
             }
         }
-        
+
     }
 }
