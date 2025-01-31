@@ -100,6 +100,8 @@ public class Main {
                     break;
                 }
                 case 8: {
+                    sm.saveToFile();
+                    System.out.println("Registration data has been successfully saved to `StudentList.csv`");
                     break;
                 }
                 case 9: {
