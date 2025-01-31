@@ -5,6 +5,7 @@ import business.Students;
 import java.util.ArrayList;
 import model.Mountain;
 import model.Student;
+import tools.Acceptable;
 import tools.Inputter;
 import tools.Menu;
 
@@ -50,9 +51,14 @@ public class Main {
                     break;
                 }
                 case 3: {
+                    sm.showAll();
                     break;
                 }
                 case 4: {
+                    // Moi nhap id
+//                    String keyId = input.inputAndLoop("Input student id:", 
+//                            Acceptable.STU_ID_VALID);
+//                    sm.delete(keyId);
                     break;
                 }
                 case 5: {
