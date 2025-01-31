@@ -95,6 +95,8 @@ public class Main {
                     break;
                 }
                 case 7: {
+                    System.out.println("Statistics of Registration by Mountain Peak:");
+                    sm.statisticalizeByMountainPeak();
                     break;
                 }
                 case 8: {
