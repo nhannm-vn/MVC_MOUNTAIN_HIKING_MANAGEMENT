@@ -62,6 +62,10 @@ public class Main {
                     break;
                 }
                 case 5: {
+                    // Yêu cầu người dùng nhập tên đầy đủ hoặc một phần tên
+                    String keyName = input.inputAndLoop("Input full name or a part of name:", 
+                            Acceptable.NAME_VALID);
+                    sm.searchByName(keyName);
                     break;
                 }
                 case 6: {
