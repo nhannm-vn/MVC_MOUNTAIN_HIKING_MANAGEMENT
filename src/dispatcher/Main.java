@@ -10,7 +10,7 @@ import tools.Inputter;
 import tools.Menu;
 
 public class Main {
-
+    
     public static void main(String[] args) {
         // Tạo instance Students chuyên quản lí các chức năng liên quan đến danh sách
         Students sm = new Students();
@@ -56,9 +56,9 @@ public class Main {
                 }
                 case 4: {
                     // Moi nhap id
-//                    String keyId = input.inputAndLoop("Input student id:", 
-//                            Acceptable.STU_ID_VALID);
-//                    sm.delete(keyId);
+                    String keyId = input.inputAndLoop("Input student id:",
+                            Acceptable.STU_ID_VALID);
+                    sm.delete(keyId);
                     break;
                 }
                 case 5: {
@@ -82,6 +82,6 @@ public class Main {
                 }
             }
         }
-
+        
     }
 }
