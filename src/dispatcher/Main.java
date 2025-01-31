@@ -8,8 +8,8 @@ import model.Student;
 import tools.Inputter;
 import tools.Menu;
 
-
 public class Main {
+
     public static void main(String[] args) {
         // Tạo instance Students chuyên quản lí các chức năng liên quan đến danh sách
         Students sm = new Students();
@@ -19,7 +19,7 @@ public class Main {
         Inputter input = new Inputter();
         // Tạo instance Mountains chuyên quản lí các mountain
         Mountains mountains = new Mountains();
-        
+
         // Thêm yêu các yêu cầu cho menu
         menu.addNewOption("Add a new student registration.");
         menu.addNewOption("Modify existing registration details.");
@@ -30,5 +30,16 @@ public class Main {
         menu.addNewOption("Generate statistics on the number of registrations for each location.");
         menu.addNewOption("Store registration data in a file");
         menu.addNewOption("End the program execution.");
+
+        // Đọc file để có dữ liệu trước khi chạy chương trình 
+        sm.readFromFile();
+        mountains.readFromFile();
+
+        // Tạo biến để thu thập lựa chọn của người dùng
+        int choice;
+        while (true) {
+            choice = menu.getChoice();
+        }
+
     }
 }
