@@ -56,7 +56,7 @@ public class Main {
                         tempStudent = sm.searchById(keyId);
                         // Nếu không tìm thấy và valid id thì isFind = true
                         //và dừng vòng lặp
-                        if (tempStudent != null && keyId.matches(Acceptable.STU_ID_VALID)) {
+                        if (tempStudent == null && keyId.matches(Acceptable.STU_ID_VALID)) {
                             isFind = true;
                         } else {
                             System.out.println("Data is invalid! Re-enter...");
@@ -77,9 +77,9 @@ public class Main {
                         mountainCode = input.getString("Input mountain code of student:");
                         // Check xem mã núi có trong list không. Nếu không có thì phải 
                         //nhập lại
-                        if(mountains.isValidMountainCode(mountainCode)){
+                        if (mountains.isValidMountainCode(mountainCode)) {
                             isFind = true;
-                        }else{
+                        } else {
                             System.out.println("Data is invalid! Re-enter...");
                         }
                     } while (!isFind);
@@ -92,6 +92,54 @@ public class Main {
                     break;
                 }
                 case 2: {
+                    // Nhập vào id nếu mà không có thằng để update thì báo luôn
+                    String id = input.inputAndLoop("Input student id:",
+                            Acceptable.STU_ID_VALID);
+                    // Check
+                    Student updateStudent = sm.searchById(id);
+                    // Nếu không có thì làm sao update được
+                    if (updateStudent == null) {
+                        System.out.println("This student has not registered yet.");
+                    } else {
+                        String name = input.inputAndLoop("Input student name:",
+                                Acceptable.NAME_VALID);
+                        String phone = input.inputAndLoop("Input student phone number:",
+                                Acceptable.PHONE_VALID);
+                        String email = input.inputAndLoop("Input student email:",
+                                Acceptable.EMAIL_VALID);
+                        // Check valid cho mountainCode
+                        String mountainCode;
+                        boolean isFind = false;
+                        do {
+                            // reset
+                            isFind = false;
+                            mountainCode = input.getString("Input mountain code of student:");
+                            // Check xem mã núi có trong list không. Nếu không có thì phải 
+                            //nhập lại
+                            if (mountains.isValidMountainCode(mountainCode)) {
+                                isFind = true;
+                            } else {
+                                System.out.println("Data is invalid! Re-enter...");
+                            }
+                        } while (!isFind);
+                        // set lại các thuộc tính
+                        updateStudent.setName(name);
+                        updateStudent.setPhone(phone);
+                        updateStudent.setEmail(email);
+                        updateStudent.setMountainCode(mountainCode);
+                        // sau khi update sdt thì cũng phải update lại số tiền luôn
+                        if (updateStudent.getPhone().matches(Acceptable.VIETTEL_VALID)
+                                || updateStudent.getPhone().matches(Acceptable.VNPT_VALID)) {
+                            double free = (6000000 * 35) / 100;
+                            updateStudent.setTutionFee(6000000 - free);
+                        }else{
+                            updateStudent.setTutionFee(6000000);
+                        }
+                        // Nhờ sm update vào list
+                        sm.update(updateStudent);
+                        // Thông báo
+                        System.out.println("Update student information successfully");
+                    }
                     break;
                 }
                 case 3: {
