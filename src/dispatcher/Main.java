@@ -46,6 +46,22 @@ public class Main {
             choice = menu.getChoice();
             switch (choice) {
                 case 1: {
+                    // Check stuId truoc xem co trung khong
+                    boolean isFind = false;
+                    Student tempStudent = null;
+                    String keyId;
+                    do {
+                        isFind = false;
+                        keyId = input.getString("Input student id:");
+                        tempStudent = sm.searchById(keyId);
+                        // Nếu không tìm thấy và valid id thì isFind = true
+                        //và dừng vòng lặp
+                        if (tempStudent != null && keyId.matches(Acceptable.STU_ID_VALID)) {
+                            isFind = true;
+                        } else {
+                            System.out.println("Data is invalid! Re-enter...");
+                        }
+                    } while (!isFind);
                     break;
                 }
                 case 2: {
@@ -89,7 +105,7 @@ public class Main {
                             System.out.println(student.toString());
                         }
                         System.out.println("-----------------------------------------------------------------------------");
-                    }else{
+                    } else {
                         System.out.println("No students have registered under this campus.");
                     }
                     break;
