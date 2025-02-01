@@ -196,6 +196,16 @@ public class Main {
                     break;
                 }
                 case 9: {
+                    // Nếu đã chạy method saveToFile rồi thì dừng luôn
+                    if(sm.isSaved()) return;
+                    // Nếu chưa thì hỏi có muốn save không trước khi tắt
+                    String option = input.inputAndLoop("You have unsaved changes."
+                    + " Are you sure you want to exit without saving? (Y/N)", "^[YyNn]$");
+                    if(option.matches("^[Yy]$")){
+                        sm.saveToFile();
+                    }else{
+                        return;
+                    }
                     return;
                 }
                 default: {
