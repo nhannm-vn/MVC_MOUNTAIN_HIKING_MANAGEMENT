@@ -62,6 +62,33 @@ public class Main {
                             System.out.println("Data is invalid! Re-enter...");
                         }
                     } while (!isFind);
+                    // Nhập các field khác 
+                    String name = input.inputAndLoop("Input student name:",
+                            Acceptable.NAME_VALID);
+                    String phone = input.inputAndLoop("Input student phone number:",
+                            Acceptable.PHONE_VALID);
+                    String email = input.inputAndLoop("Input student email:",
+                            Acceptable.EMAIL_VALID);
+                    // Check mountain code nhập vào có trong list chưa
+                    String mountainCode;
+                    do {
+                        // reset
+                        isFind = false;
+                        mountainCode = input.getString("Input mountain code of student:");
+                        // Check xem mã núi có trong list không. Nếu không có thì phải 
+                        //nhập lại
+                        if(mountains.isValidMountainCode(mountainCode)){
+                            isFind = true;
+                        }else{
+                            System.out.println("Data is invalid! Re-enter...");
+                        }
+                    } while (!isFind);
+                    // Tạo ra instance bằng cái phểu tính tiền
+                    Student newStudent = new Student(keyId, name, phone, email, mountainCode);
+                    // Thêm vào danh sách
+                    sm.add(newStudent);
+                    // Thông báo thành công
+                    System.out.println("Adding new student to list successfully!");
                     break;
                 }
                 case 2: {
