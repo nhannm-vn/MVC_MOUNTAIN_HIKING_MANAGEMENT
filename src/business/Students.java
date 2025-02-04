@@ -166,69 +166,140 @@ public class Students {
     }
 
     // readFromFile():void
-    public void readFromFile() {
-        // Tạo ra instance obj file
+    public void readFromFile(){
+        // Tạo obj file
         File f = new File(pathFile);
-        // Quá trình đọc file có thể có lỗi nên cần try-catch
+        // Quá trình đọc file có thể xảy ra lỗi nên cần try-catch
         try {
-            // Nếu instance tạo mà bị lỗi thì thông báo và dừng luôn
-            if (!f.exists()) {
-                System.out.println("StudentList.csv file not found !.");
+            // Kiểm tra nếu như obj f không tồn tại thì return luôn
+            if(!f.exists()){
+                System.out.println("StudentList.csv not found!");
                 return;
             }
-            // Tạo đối tượng đọc dữ liệu
+            // Tạo ra anh đọc file
             FileReader fr = new FileReader(f);
-            // Tạo buffer đọc và lấy dữ liệu
+            // Tạo ra anh buffer đọc file
             BufferedReader br = new BufferedReader(fr);
             // Đọc dòng đầu tiên
             String line = br.readLine();
             while(line != null && !line.isEmpty()){
-                // Băm các field ra bằng StringTokenizer
                 StringTokenizer st = new StringTokenizer(line, ",");
-                String id = st.nextToken();
-                String name = st.nextToken();
-                String phone = st.nextToken();
-                String email = st.nextToken();
-                String mountainCode = st.nextToken();
-                double tutionFee = Double.parseDouble(st.nextToken());
-                // tạo obj
-                // Viết tới đây sẽ hiểu tại sao cần để cho model Student cái phểu mặc định
+                // Băm các field ra 
+                String id = st.nextToken().trim();
+                String name = st.nextToken().trim();
+                String phone = st.nextToken().trim();
+                String email = st.nextToken().trim();
+                String mountainCode = st.nextToken().trim();
+                // ép kiểu riêng thằng này
+                double tutionFee = Double.parseDouble(st.nextToken().trim());
+                // Đúc ra object
                 Student s = new Student(id, name, phone, email, mountainCode, tutionFee);
-                // thêm vào danh sách
-                studentList.add(s);
+                // Nếu có object thì thêm vào list
+                if(s != null){
+                    studentList.add(s);
+                }
                 // Đọc dòng tiếp theo
                 line = br.readLine();
             }
-            // Đóng 
+            // Dừng 
             br.close();
         } catch (Exception e) {
-            System.out.println("File loi roi: " +e);
+            System.out.println("File lỗi rồi: " +e);
         }
     }
+//    public void readFromFile() {
+//        // Tạo ra instance obj file
+//        File f = new File(pathFile);
+//        // Quá trình đọc file có thể có lỗi nên cần try-catch
+//        try {
+//            // Nếu instance tạo mà bị lỗi thì thông báo và dừng luôn
+//            if (!f.exists()) {
+//                System.out.println("StudentList.csv file not found !.");
+//                return;
+//            }
+//            // Tạo đối tượng đọc dữ liệu
+//            FileReader fr = new FileReader(f);
+//            // Tạo buffer đọc và lấy dữ liệu
+//            BufferedReader br = new BufferedReader(fr);
+//            // Đọc dòng đầu tiên
+//            String line = br.readLine();
+//            while(line != null && !line.isEmpty()){
+//                // Băm các field ra bằng StringTokenizer
+//                StringTokenizer st = new StringTokenizer(line, ",");
+//                String id = st.nextToken();
+//                String name = st.nextToken();
+//                String phone = st.nextToken();
+//                String email = st.nextToken();
+//                String mountainCode = st.nextToken();
+//                double tutionFee = Double.parseDouble(st.nextToken());
+//                // tạo obj
+//                // Viết tới đây sẽ hiểu tại sao cần để cho model Student cái phểu mặc định
+//                Student s = new Student(id, name, phone, email, mountainCode, tutionFee);
+//                // thêm vào danh sách
+//                studentList.add(s);
+//                // Đọc dòng tiếp theo
+//                line = br.readLine();
+//            }
+//            // Đóng 
+//            br.close();
+//        } catch (Exception e) {
+//            System.out.println("File loi roi: " +e);
+//        }
+//    }
     
     // saveToFile()
     public void saveToFile(){
-        // Nếu đã lưu rồi thì không chạy method này
+        // Nếu đã chạy hàm này rồi thì dừng luôn
         if(isSaved) return;
         // Tạo obj file
         File f = new File(pathFile);
-        if(!f.exists()) return;
         try {
+            // Nếu không tồn tại thì dừng luôn
+            if(!f.exists()) return;
+            // Tạo ra anh ghi file
             FileWriter fw = new FileWriter(f);
+            // Tạo buffer ghi file
             BufferedWriter writter = new BufferedWriter(fw);
+            // Duyet danh sach va tien hanh ghi
             for (Student student : studentList) {
-                writter.write(student.getId() + "," + student.getName() + "," 
-                              + student.getPhone() + "," + student.getEmail() + ","
-                              + student.getMountainCode() + "," + student.getTutionFee());
-                // xuong dong
-                writter.newLine();
+                writter.write(student.getId() + "," + student.getName() + "," +
+                        student.getPhone() + "," + student.getEmail() + "," + 
+                        student.getMountainCode() + "," + student.getTutionFee());
+                 // Xuong dong
+                 writter.newLine();
             }
+            // Tat
             writter.close();
-            // Khi chay xong method nay thi xac nhan da luu roi
+            // Doi trang thai cho bien check luu
             this.isSaved = true;
         } catch (Exception e) {
-            System.out.println("File loi roi: " +e);
+            System.out.println("File lỗi gòi: " +e);
         }
+        
     }
+    
+//    public void saveToFile(){
+//        // Nếu đã lưu rồi thì không chạy method này
+//        if(isSaved) return;
+//        // Tạo obj file
+//        File f = new File(pathFile);
+//        if(!f.exists()) return;
+//        try {
+//            FileWriter fw = new FileWriter(f);
+//            BufferedWriter writter = new BufferedWriter(fw);
+//            for (Student student : studentList) {
+//                writter.write(student.getId() + "," + student.getName() + "," 
+//                              + student.getPhone() + "," + student.getEmail() + ","
+//                              + student.getMountainCode() + "," + student.getTutionFee());
+//                // xuong dong
+//                writter.newLine();
+//            }
+//            writter.close();
+//            // Khi chay xong method nay thi xac nhan da luu roi
+//            this.isSaved = true;
+//        } catch (Exception e) {
+//            System.out.println("File loi roi: " +e);
+//        }
+//    }
 
 }
