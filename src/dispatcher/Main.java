@@ -53,7 +53,7 @@ public class Main {
                     do {
                         isFind = false;
                         keyId = input.getString("Input student id:");
-                        tempStudent = sm.searchById(keyId);
+                        tempStudent = sm.searchById(keyId.toUpperCase());
                         // Nếu không tìm thấy và valid id thì isFind = true
                         //và dừng vòng lặp
                         if (tempStudent == null && keyId.matches(Acceptable.STU_ID_VALID)) {
@@ -96,7 +96,7 @@ public class Main {
                     String id = input.inputAndLoop("Input student id:",
                             Acceptable.STU_ID_VALID);
                     // Check
-                    Student updateStudent = sm.searchById(id);
+                    Student updateStudent = sm.searchById(id.toUpperCase());
                     // Nếu không có thì làm sao update được
                     if (updateStudent == null) {
                         System.out.println("This student has not registered yet.");
