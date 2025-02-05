@@ -35,27 +35,47 @@ public class Statistics extends HashMap<String, StatisticalInfo>{
     // Method
     // Phương thức thực hiện thống kê dữ liệu dựa trên danh sách
     //nghĩa là nó sẽ nhận vào danh sách và tiến hành thống kê
+//    public final void statisticalize(List<Student> list){
+//        // Duyệt danh sách list vừa mới truyền vào
+//        for (Student item : list) {
+//            // Trường hợp item có mountainCode nằm trong key của danh sách hashMap
+//            if(this.containsKey(item.getMountainCode())){
+//                // Thì móc thằng object dựa vào key đó ra và tiến hành cập nhật
+//                StatisticalInfo x = this.get(item.getMountainCode());
+//                // Tiến hành cập nhật cho nó
+//                // Cập nhật thêm một sinh viên mới
+//                x.setNumOfStudent(x.getNumOfStudent() + 1);
+//                // Cập nhật số tiền của nó
+//                x.setTotalCost(x.getTotalCost() + item.getTutionFee());
+//            }else{
+//                // Nghĩa là chưa có thì sẽ tiến hành thêm mới vào hashMap luôn
+//                StatisticalInfo z = new StatisticalInfo(item.getMountainCode(),
+//                        1, item.getTutionFee());
+//                // Thêm vào danh sách 
+//                this.put(item.getMountainCode(), z);
+//            }
+//        }
+//    }
+    
     public final void statisticalize(List<Student> list){
-        // Duyệt danh sách list vừa mới truyền vào
+        // Duyet danh sach moi truyen vao
         for (Student item : list) {
-            // Trường hợp item có mountainCode nằm trong key của danh sách hashMap
+            // TH item co mountainCode nam trong hashMap
             if(this.containsKey(item.getMountainCode())){
-                // Thì móc thằng object dựa vào key đó ra và tiến hành cập nhật
+                // Moc no ra 
                 StatisticalInfo x = this.get(item.getMountainCode());
-                // Tiến hành cập nhật cho nó
-                // Cập nhật thêm một sinh viên mới
+                // Cap nhat lai cac thong tin
                 x.setNumOfStudent(x.getNumOfStudent() + 1);
-                // Cập nhật số tiền của nó
+                // Cap nhat lai so tien
                 x.setTotalCost(x.getTotalCost() + item.getTutionFee());
             }else{
-                // Nghĩa là chưa có thì sẽ tiến hành thêm mới vào hashMap luôn
-                StatisticalInfo z = new StatisticalInfo(item.getMountainCode(),
-                        1, item.getTutionFee());
-                // Thêm vào danh sách 
+                StatisticalInfo z = new StatisticalInfo(item.getMountainCode(), 1, item.getTutionFee());
+                // Them vao
                 this.put(item.getMountainCode(), z);
             }
         }
     }
+    
 //    public final void statisticalize(List<Student> list){
 //        // Duyet danh sach
 //        for (Student item : list) {
